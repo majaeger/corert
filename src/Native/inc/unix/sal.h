@@ -2440,9 +2440,11 @@ extern "C" {
      that the buffer pointer is either NULL or points to a NULL-terminated string.
     */
 
+#ifndef PAL_STDCPP_COMPAT
     #define __valid                 _Valid_impl_
     #define __notvalid              _Notvalid_impl_
     #define __maybevalid            _Maybevalid_impl_
+#endif // !PAL_STDCPP_COMPAT
 
     /*
      __readableTo(extent) p
@@ -2608,9 +2610,11 @@ extern "C" {
     #define __readonly
     #define __notreadonly
     #define __maybereadonly
+#ifndef PAL_STDCPP_COMPAT
     #define __valid
     #define __notvalid
     #define __maybevalid
+#endif // !PAL_STDCPP_COMPAT
     #define __readableTo(extent)
     #define __elem_readableTo(size)
     #define __byte_readableTo(size)
@@ -2674,18 +2678,26 @@ buffer, use the table in the buffer annotations section.
 #define __out_bcount_part(size,length)                           _SAL1_Source_(__out_bcount_part, (size,length), _Out_writes_bytes_to_(size,length))
 #define __out_ecount_full(size)                                  _SAL1_Source_(__out_ecount_full, (size), _Out_writes_all_(size))
 #define __out_bcount_full(size)                                  _SAL1_Source_(__out_bcount_full, (size), _Out_writes_bytes_all_(size))
+
+#ifndef PAL_STDCPP_COMPAT
 #define __out_z                                                  _SAL1_Source_(__out_z, (), __post __valid __refparam __post __nullterminated)
 #define __out_z_opt                                              _SAL1_Source_(__out_z_opt, (), __post __valid __refparam __post __nullterminated __pre_except_maybenull)
 #define __out_ecount_z(size)                                     _SAL1_Source_(__out_ecount_z, (size), __ecount(size) __post __valid __refparam __post __nullterminated)
 #define __out_bcount_z(size)                                     _SAL1_Source_(__out_bcount_z, (size), __bcount(size) __post __valid __refparam __post __nullterminated)
+#endif // !PAL_STDCPP_COMPAT
+
 #define __out_ecount_part_z(size,length)                         _SAL1_Source_(__out_ecount_part_z, (size,length), __out_ecount_part(size,length) __post __nullterminated)
 #define __out_bcount_part_z(size,length)                         _SAL1_Source_(__out_bcount_part_z, (size,length), __out_bcount_part(size,length) __post __nullterminated)
 #define __out_ecount_full_z(size)                                _SAL1_Source_(__out_ecount_full_z, (size), __out_ecount_full(size) __post __nullterminated)
 #define __out_bcount_full_z(size)                                _SAL1_Source_(__out_bcount_full_z, (size), __out_bcount_full(size) __post __nullterminated)
+
+#ifndef PAL_STDCPP_COMPAT
 #define __out_nz                                                 _SAL1_Source_(__out_nz, (), __post __valid __refparam)
 #define __out_nz_opt                                             _SAL1_Source_(__out_nz_opt, (), __post __valid __refparam __post_except_maybenull_)
 #define __out_ecount_nz(size)                                    _SAL1_Source_(__out_ecount_nz, (size), __ecount(size) __post __valid __refparam)
 #define __out_bcount_nz(size)                                    _SAL1_Source_(__out_bcount_nz, (size), __bcount(size) __post __valid __refparam)
+#endif // !PAL_STDCPP_COMPAT
+
 #define __inout                                                  _SAL1_Source_(__inout, (), _Inout_)
 #define __inout_ecount(size)                                     _SAL1_Source_(__inout_ecount, (size), _Inout_updates_(size))
 #define __inout_bcount(size)                                     _SAL1_Source_(__inout_bcount, (size), _Inout_updates_bytes_(size))
@@ -2754,7 +2766,11 @@ buffer, use the table in the buffer annotations section.
 #define __deref_out_nz                                           _SAL1_Source_(__deref_out_nz, (), __deref_out)
 #define __deref_out_ecount_nz(size)                              _SAL1_Source_(__deref_out_ecount_nz, (size), __deref_out_ecount(size))
 #define __deref_out_bcount_nz(size)                              _SAL1_Source_(__deref_out_bcount_nz, (size), __deref_out_ecount(size))
+
+#ifndef PAL_STDCPP_COMPAT
 #define __deref_inout                                            _SAL1_Source_(__deref_inout, (), _Notref_ __notnull _Notref_ __elem_readableTo(1) __pre __deref __valid __post _Notref_ __deref __valid __refparam)
+#endif // !PAL_STDCPP_COMPAT
+
 #define __deref_inout_z                                          _SAL1_Source_(__deref_inout_z, (), __deref_inout __pre __deref __nullterminated __post _Notref_ __deref __nullterminated)
 #define __deref_inout_ecount(size)                               _SAL1_Source_(__deref_inout_ecount, (size), __deref_inout __pre __deref __elem_writableTo(size) __post _Notref_ __deref __elem_writableTo(size))
 #define __deref_inout_bcount(size)                               _SAL1_Source_(__deref_inout_bcount, (size), __deref_inout __pre __deref __byte_writableTo(size) __post _Notref_ __deref __byte_writableTo(size))
@@ -2827,7 +2843,11 @@ buffer, use the table in the buffer annotations section.
 #define __deref_opt_out_bcount_part_opt(size,length)             _SAL1_Source_(__deref_opt_out_bcount_part_opt, (size,length), __deref_out_bcount_part_opt(size,length)    __pre_except_maybenull)
 #define __deref_opt_out_ecount_full_opt(size)                    _SAL1_Source_(__deref_opt_out_ecount_full_opt, (size), __deref_out_ecount_full_opt(size)           __pre_except_maybenull)
 #define __deref_opt_out_bcount_full_opt(size)                    _SAL1_Source_(__deref_opt_out_bcount_full_opt, (size), __deref_out_bcount_full_opt(size)           __pre_except_maybenull)
+
+#ifndef PAL_STDCPP_COMPAT
 #define __deref_opt_out_z_opt                                    _SAL1_Source_(__deref_opt_out_z_opt, (), __post __deref __valid __refparam __pre_except_maybenull __pre_deref_except_maybenull __post_deref_except_maybenull __post __deref __nullterminated)
+#endif // !PAL_STDCPP_COMPAT
+
 #define __deref_opt_out_ecount_z_opt(size)                       _SAL1_Source_(__deref_opt_out_ecount_z_opt, (size), __deref_opt_out_ecount_opt(size) __post __deref __nullterminated)
 #define __deref_opt_out_bcount_z_opt(size)                       _SAL1_Source_(__deref_opt_out_bcount_z_opt, (size), __deref_opt_out_bcount_opt(size) __post __deref __nullterminated)
 #define __deref_opt_out_nz_opt                                   _SAL1_Source_(__deref_opt_out_nz_opt, (), __deref_opt_out_opt)
